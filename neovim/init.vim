@@ -61,9 +61,12 @@ inoremap ää }
 " misc nnoremaps
 nnoremap <A-f> :NERDTree<CR>
 
+"misc vnoremaps
+vnoremap jk <esc>
+
 " move line or or visually selected block - alt+j/k
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
+inoremap <A-j> <esc>:m .+1<CR>==gi
+inoremap <A-k> <esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
@@ -73,5 +76,10 @@ nnoremap <A-i> <C-W>J
 nnoremap <A-j> <C-W>K
 nnoremap <A-k> <C-W>L
 
+" move between panes to left/bottom/top/right
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " --------------------------------------------------------------------------}}}
