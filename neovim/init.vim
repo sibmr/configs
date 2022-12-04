@@ -130,3 +130,8 @@ nmap <F4> :call SVED_Sync()<CR>
 autocmd BufRead,BufNewFile *.tex setlocal spell spelllang=en_us
 
 " --------------------------------------------------------------------------}}}
+
+" Needed in WSL Only -------------------------------------------------------{{{
+" prevent crash caused by yy and p related to win32yank
+set clipboard=unnamedplus
+" --------------------------------------------------------------------------}}}
