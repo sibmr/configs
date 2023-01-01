@@ -1,4 +1,4 @@
-" Basic Config {{{ 
+" Basic Config -------------------------------------------------------------{{{ 
 
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
@@ -32,22 +32,24 @@ set timeout timeoutlen=1500
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
 
-" }}}
+" --------------------------------------------------------------------------}}}
 
-" Plugins {{{ 
+" Plugins ------------------------------------------------------------------{{{ 
 call plug#begin("~/.vim/plugged")
- Plug 'dracula/vim'
+ Plug 'dracula/vim'                 " dracula color theme
  Plug 'ryanoasis/vim-devicons'
  Plug 'SirVer/ultisnips'
  Plug 'honza/vim-snippets'
- Plug 'scrooloose/nerdtree'
- Plug 'preservim/nerdcommenter'
- Plug 'mhinz/vim-startify'
- Plug 'lervag/vimtex'
- Plug 'peterbjorgensen/sved'
+ Plug 'scrooloose/nerdtree'         " file browser
+ Plug 'preservim/nerdcommenter'     " shortcuts for commenting lines
+ Plug 'mhinz/vim-startify'          " start page plugin
+ Plug 'lervag/vimtex'               " latex plugin
+ Plug 'peterbjorgensen/sved'        " for syncing vim latex and pdf viewer
+ Plug 'vim-airline/vim-airline'
+ Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
-"}}}
+" --------------------------------------------------------------------------}}}
 
 " Color Schemes ------------------------------------------------------------{{{
 if (has("termguicolors"))
@@ -121,6 +123,14 @@ let maplocalleader = ","
 
 " SVED sync evince and nvim over dbus
 nmap <F4> :call SVED_Sync()<CR>
+
+" enable airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.colnr = 'c:'
 
 " --------------------------------------------------------------------------}}}
 
