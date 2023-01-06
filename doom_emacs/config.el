@@ -125,15 +125,16 @@
                                   (listify-key-sequence "{"))))
                 (list ?ä '(lambda ()
                             (setq unread-command-events
-                                  (listify-key-sequence "[")))))))
+                                  (listify-key-sequence "["))))))))
+
 (map! :desc "map" :i "ä" (lambda () (interactive)
-        (my-keychord-list 0.4 ?ä (list
+        (my-keychord-list 0.4 ?ö (list
                 (list ?ä '(lambda ()
                             (setq unread-command-events
                                   (listify-key-sequence "}"))))
-                (list ?ö '(lambda () (insert-char ?\]))
+                (list ?ö '(lambda ()
                             (setq unread-command-events
-                                  (listify-key-sequence "[")))))))
+                                  (listify-key-sequence "]"))))))))
 
 (map! :desc "map" :i "j" (lambda () (interactive)
         (my-keychord-list 0.1 ?j (list
