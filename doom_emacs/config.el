@@ -83,59 +83,80 @@
 (setq tab-width 4)
 (setq tab-stop-list (number-sequence 4 200 4))
 
-;; keymap
-(defun my-keychord (initial-key final-key effect-func)
-  (interactive)
-  (let* ((timeout 0.2)
-         (event (read-event nil nil timeout)))
-    ;; check if a key is pressed
-    (if event
-        ;; timeout met
-        (if (and (characterp event) (= event final-key))
-            ;; if timeout and final key pressed, do effect-func
-            (funcall effect-func)
-          ;; otherwise insert keys
-          (insert initial-key)
-          (push event unread-command-events))
-      ;; timeout exceeded
-      (insert initial-key))))
+;; ;; keymap
+;; (defun my-keychord (initial-key final-key effect-func)
+;;   (interactive)
+;;   (let* ((timeout 0.2)
+;;          (event (read-event nil nil timeout)))
+;;     ;; check if a key is pressed
+;;     (if event
+;;         ;; timeout met
+;;         (if (and (characterp event) (= event final-key))
+;;             ;; if timeout and final key pressed, do effect-func
+;;             (funcall effect-func)
+;;           ;; otherwise insert keys
+;;           (insert initial-key)
+;;           (push event unread-command-events))
+;;       ;; timeout exceeded
+;;       (insert initial-key))))
 
-(defun my-keychord-list (timeout initial-key key-effect-list)
-  (interactive)
-  (let* ((event (read-event nil nil timeout)))
-    ;; check if a key is pressed
-    (if event
-        ;; timeout met
-        (if (characterp event)
-            ;; if timeout and final key pressed, do effect-func
-            (dolist (key-effect key-effect-list)
-              (if (= event (nth 0 key-effect))
-                  (funcall (nth 1 key-effect))))
-          ;; otherwise insert keys
-          (insert initial-key)
-          (push event unread-command-events))
-      ;; timeout exceeded
-      (insert initial-key))))
+;; (defun my-keychord-list (timeout initial-key key-effect-list)
+;;   (interactive)
+;;   (let* ((event (read-event nil nil timeout)))
+;;     ;; check if a key is pressed
+;;     (if event
+;;         ;; timeout met
+;;         (if (characterp event)
+;;             ;; if timeout and final key pressed, do effect-func
+;;             (dolist (key-effect key-effect-list)
+;;               (if (= event (nth 0 key-effect))
+;;                   (funcall (nth 1 key-effect))))
+;;           ;; otherwise insert keys
+;;           (insert initial-key)
+;;           (push event unread-command-events))
+;;       ;; timeout exceeded
+;;       (insert initial-key))))
 
-;; map brackets to öö and ää
-(map! :desc "map" :i "ö" (lambda () (interactive)
-        (my-keychord-list 0.4 ?ö (list
-                (list ?ö '(lambda ()
-                            (setq unread-command-events
-                                  (listify-key-sequence "{"))))
-                (list ?ä '(lambda ()
-                            (setq unread-command-events
-                                  (listify-key-sequence "["))))))))
+;; ;; map brackets to öö and ää
+;; (map! :desc "map" :i "ö" (lambda () (interactive)
+;;         (my-keychord-list 0.4 ?ö (list
+;;                 (list ?ö '(lambda ()
+;;                             (setq unread-command-events
+;;                                   (listify-key-sequence "{"))))
+;;                 (list ?ä '(lambda ()
+;;                             (setq unread-command-events
+;;                                   (listify-key-sequence "["))))))))
 
-(map! :desc "map" :i "ä" (lambda () (interactive)
-        (my-keychord-list 0.4 ?ö (list
-                (list ?ä '(lambda ()
-                            (setq unread-command-events
-                                  (listify-key-sequence "}"))))
-                (list ?ö '(lambda ()
-                            (setq unread-command-events
-                                  (listify-key-sequence "]"))))))))
+;; (map! :desc "map" :i "ä" (lambda () (interactive)
+;;         (my-keychord-list 0.4 ?ä (list
+;;                 (list ?ä '(lambda ()
+;;                             (setq unread-command-events
+;;                                   (listify-key-sequence "}"))))
+;;                 (list ?ö '(lambda ()
+;;                             (setq unread-command-events
+;;                                   (listify-key-sequence "]"))))))))
 
-(map! :desc "map" :i "j" (lambda () (interactive)
-        (my-keychord-list 0.1 ?j (list
-                (list ?j 'evil-normal-state)))))
+;; (map! :desc "map" :i "j" (lambda () (interactive)
+;;         (my-keychord-list 0.1 ?j (list
+;;                 (list ?j 'evil-normal-state)))))
+
+ (map! :desc "comment line" :leader "k" (lambda () (interactive)
+         (comment-line 1)))
+
+
+(setq key-chord-two-keys-delay 0.2)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "öö"
+                  (lambda () (interactive)
+                    (setq unread-command-events (listify-key-sequence "{"))))
+(key-chord-define evil-insert-state-map "ää"
+                  (lambda () (interactive)
+                    (setq unread-command-events (listify-key-sequence "}"))))
+(key-chord-define evil-insert-state-map "ÖÖ"
+                  (lambda () (interactive)
+                    (setq unread-command-events (listify-key-sequence "["))))
+(key-chord-define evil-insert-state-map "ÄÄ"
+                  (lambda () (interactive)
+                    (setq unread-command-events (listify-key-sequence "]"))))
+
+(key-chord-mode 1)
