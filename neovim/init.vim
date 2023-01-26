@@ -27,7 +27,7 @@ set splitbelow              " open new split panes below
 set foldmethod=marker
 set nowrap
 let mapleader=","
-set timeout timeoutlen=1500
+set timeout timeoutlen=500
 " set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.

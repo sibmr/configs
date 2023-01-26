@@ -140,10 +140,11 @@
 ;;         (my-keychord-list 0.1 ?j (list
 ;;                 (list ?j 'evil-normal-state)))))
 
- (map! :desc "comment line" :leader "k" (lambda () (interactive)
+(map! :desc "comment line" :leader "k" (lambda () (interactive)
          (comment-line 1)))
 
 
+;; setup keychord
 (setq key-chord-two-keys-delay 0.2)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-define evil-insert-state-map "öö"
@@ -158,5 +159,7 @@
 (key-chord-define evil-insert-state-map "ÄÄ"
                   (lambda () (interactive)
                     (setq unread-command-events (listify-key-sequence "]"))))
-
 (key-chord-mode 1)
+
+;; do not enable ws butler globally
+(remove-hook 'doom-first-buffer-hook #'ws-butler-global-mode)
