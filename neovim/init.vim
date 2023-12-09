@@ -36,6 +36,7 @@ set timeout timeoutlen=500
 
 " Plugins ------------------------------------------------------------------{{{ 
 call plug#begin("~/.vim/plugged")
+ Plug 'nvim-lua/plenary.nvim'
  Plug 'dracula/vim'                 " dracula color theme
  Plug 'ryanoasis/vim-devicons'
  Plug 'SirVer/ultisnips'
@@ -47,6 +48,7 @@ call plug#begin("~/.vim/plugged")
  Plug 'peterbjorgensen/sved'        " for syncing vim latex and pdf viewer
  Plug 'vim-airline/vim-airline'
  Plug 'vim-airline/vim-airline-themes'
+ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.3' }
 call plug#end()
 
 " --------------------------------------------------------------------------}}}
@@ -90,6 +92,19 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " --------------------------------------------------------------------------}}}
 
