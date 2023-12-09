@@ -1,0 +1,5 @@
+require("bootstrap")
+require("globals")
+require("options")
+require("lazy").setup("plugins")
+require("keymaps")
