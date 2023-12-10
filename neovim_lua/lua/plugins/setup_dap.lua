@@ -3,32 +3,81 @@ return {
         "mfussenegger/nvim-dap",
         keys = {
             {
-                "<F2>",
-                function()
-                    require("dap").continue()
-                end,
-                mode = { "n", "i", "v" }
+                '<F5>',
+                function() require('dap').continue() end,
+                mode = { "n" }
             },
             {
-                "<F3>",
-                function()
-                    require("dap").step_over()
-                end,
-                mode = { "n", "i", "v" }
+                '<F10>',
+                function() require('dap').step_over() end,
+                mode = { "n" }
             },
             {
-                "<F4>",
-                function()
-                    require("dap").step_into()
-                end,
-                mode = { "n", "i", "v" }
+                '<F11>',
+                function() require('dap').step_into() end,
+                mode = { "n" }
             },
             {
-                "<F5>",
+                '<F12>',
+                function() require('dap').step_out() end,
+                mode = { "n" }
+            },
+            {
+                '<Leader>b',
+                function() require('dap').toggle_breakpoint() end,
+                mode = { "n" }
+            },
+            {
+                '<Leader>B',
+                function() require('dap').set_breakpoint() end,
+                mode = { "n" }
+            },
+            {
+                '<Leader>lp',
                 function()
-                    require("dap").repl.open()
+                    require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
                 end,
-                mode = { "n", "i", "v" }
+                mode = { "n" }
+            },
+            {
+                '<Leader>dr',
+                function() require('dap').repl.open() end,
+                mode = { "n" }
+            },
+            {
+                '<Leader>dl',
+                function() require('dap').run_last() end,
+                mode = { "n" }
+            },
+            {
+                '<Leader>dh',
+                function()
+                    require('dap.ui.widgets').hover()
+                end,
+                mode = {'n', 'v'}
+            },
+            {
+                '<Leader>dp',
+                function()
+                    require('dap.ui.widgets').preview()
+                end,
+                mode = {'n', 'v'}
+            },
+            {
+                '<Leader>df',
+                function()
+                    local widgets = require('dap.ui.widgets')
+                    widgets.centered_float(widgets.frames)
+                end,
+                mode = { "n" }
+            },
+            {
+                '<Leader>ds',
+                function()
+                    local widgets = require('dap.ui.widgets')
+                    widgets.centered_float(widgets.scopes)
+                end,
+                mode = { "n" }
             },
         },
         config = function(_,_)
