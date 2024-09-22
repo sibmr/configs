@@ -132,4 +132,17 @@ return {
             }
         end,
     },
+    {
+        "rcarriga/nvim-dap-ui",
+        keys = {
+          {
+            'du',
+            function() require('dapui').toggle() end,
+            mode = { "n" }
+          }
+        },
+        config = function(_,_)
+            require('dapui').setup()
+        end,
+    },
 }
